@@ -25,6 +25,7 @@ enum ferris_tap_dances {
     TD_M_ESC,
     TD_V_X,
     TD_Z_DOT_ACUTE,
+    TD_DIVIDE,
 };
 
 enum unicode_names {
@@ -107,8 +108,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUM] = LAYOUT_split_3x5_2(
         KC_KP_ASTERISK,     KC_KP_7,            KC_KP_8,            KC_KP_9,            KC_KP_PLUS,         _______,            _______,            _______,            _______,            _______,
-        KC_KP_0,            KC_KP_1,            KC_KP_2,            KC_KP_3,            KC_KP_MINUS,        _______,            _______,            _______,            XXXXXXX,            _______,
-        KC_KP_SLASH,        KC_KP_4,            KC_KP_5,            KC_KP_6,            KC_KP_EQUAL,        _______,            _______,            _______,            _______,            _______,
+        KC_KP_0,            KC_KP_1,            KC_KP_2,            KC_KP_3,            KC_KP_MINUS,        _______,            KC_NUM_LOCK,        _______,            XXXXXXX,            _______,
+        TD(TD_DIVIDE),      KC_KP_4,            KC_KP_5,            KC_KP_6,            KC_KP_EQUAL,        _______,            _______,            _______,            _______,            _______,
                                                                     KC_KP_DOT,          KC_KP_COMMA,        _______,            _______
     ),
 
@@ -170,10 +171,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_Q_ESC]       = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC), // Tap once for Q, twice for ESC
-    [TD_M_ESC]       = ACTION_TAP_DANCE_DOUBLE(KC_M, KC_ESC), // Tap once for W, twice for ESC
-    [TD_V_X]         = ACTION_TAP_DANCE_DOUBLE(KC_V, KC_X), // Tap once for V, twice for X
+    [TD_Q_ESC]       = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),           // Tap once for Q, twice for ESC
+    [TD_M_ESC]       = ACTION_TAP_DANCE_DOUBLE(KC_M, KC_ESC),           // Tap once for W, twice for ESC
+    [TD_V_X]         = ACTION_TAP_DANCE_DOUBLE(KC_V, KC_X),             // Tap once for V, twice for X
     [TD_Z_DOT_ACUTE] = ACTION_TAP_DANCE_DOUBLE(RALT(KC_Z), RALT(KC_X)), // Tap once for Ż, twice for Ź
+    [TD_DIVIDE]      = ACTION_TAP_DANCE_DOUBLE(KC_KP_SLASH, KC_COLON),  // Tap once for /, twice for :
 };
 
 uint8_t combo_ref_from_layer(uint8_t layer) {
