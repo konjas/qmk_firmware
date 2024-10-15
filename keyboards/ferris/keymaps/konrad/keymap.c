@@ -43,10 +43,9 @@ const uint32_t PROGMEM unicode_map[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT_split_3x5_2(
-        TD(TD_Q_ESC),       KC_W,               KC_F,               KC_P,               KC_G,               KC_J,               KC_L,               KC_U,               KC_Y,               UM(LIKE),
-        LSFT_T(KC_A),       LT(_FUN,KC_R),      LT(_MOUSE,KC_S),    LT(_SYM_R,KC_T),    KC_D,               KC_H,               LT(_SYM_L,KC_N),    LT(_NAV,KC_E),      LT(_NUM,KC_I),      RSFT_T(KC_O),
-        RALT_T(KC_Z),       LCTL_T(KC_X),       LALT_T(KC_C),       LGUI_T(KC_V),       KC_B,               KC_K,               RGUI_T(KC_M),       LALT_T(KC_COMMA),   RCTL_T(KC_DOT),     RALT_T(KC_SLASH),
-                                                                    //KC_DELETE,          LT(_SHORT,KC_BSPC), LT(_MGMT,KC_SPACE), CW_TOGG
+        TD(TD_Q_ESC),       KC_W,               KC_F,               KC_P,               KC_G,               KC_J,               KC_L,               KC_U,               KC_Y,               RALT(KC_O),
+        LSFT_T(KC_A),       LT(_FUN,KC_R),      LT(_MOUSE,KC_S),    LT(_SYM_R,KC_T),    RALT(KC_N),         KC_H,               LT(_SYM_L,KC_N),    LT(_NAV,KC_E),      LT(_NUM,KC_I),      RSFT_T(KC_O),
+        RALT_T(RALT(KC_A)), LCTL_T(KC_X),       LALT_T(KC_C),       LGUI_T(KC_V),       KC_B,               RALT(KC_L),         RGUI_T(KC_M),       LALT_T(RALT(KC_E)), RCTL_T(RALT(KC_S)), RALT_T(RALT(KC_C)),
                                                                     KC_K,               LT(_SHORT,KC_D),    LT(_MGMT,KC_SPACE), KC_Z
     ),
 
@@ -157,6 +156,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LALT_T(RALT(KC_E)):
             if (record->tap.count && record->event.pressed) {
                 tap_code16(RALT(KC_E));
+                return false;
+            }
+            break;
+        case RCTL_T(RALT(KC_S)):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_S));
+                return false;
+            }
+            break;
+        case RALT_T(RALT(KC_C)):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_C));
+                return false;
+            }
+            break;
+        case RALT_T(RALT(KC_A)):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(RALT(KC_A));
                 return false;
             }
             break;
