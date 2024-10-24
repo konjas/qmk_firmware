@@ -16,6 +16,7 @@ enum ferris_layers {
 };
 
 enum custom_keycodes {
+    KC_DOT_EU,
     KC_VIM_EXIT = SAFE_RANGE,
     KC_VIM_SAVE,
 };
@@ -192,6 +193,7 @@ enum combo_events {
     COPY,
     PASTE,
     ENTER,
+    DOT_EU,
     VIM_EXIT,
     VIM_SAVE,
 };
@@ -201,6 +203,7 @@ const uint16_t PROGMEM combo_cut[]              = {KC_F4,  KC_F5,  COMBO_END};
 const uint16_t PROGMEM combo_copy[]             = {KC_4,   KC_5,   COMBO_END};
 const uint16_t PROGMEM combo_paste[]            = {KC_P4,  KC_P5,  COMBO_END};
 const uint16_t PROGMEM combo_enter[]            = {KC_9,   KC_0,   COMBO_END};
+const uint16_t PROGMEM combo_dot_eu[]           = {KC_F8,  KC_8,   COMBO_END};
 const uint16_t PROGMEM combo_vim_exit[]         = {KC_F1,  KC_F10, COMBO_END};
 const uint16_t PROGMEM combo_vim_save[]         = {KC_1,   KC_0,   COMBO_END};
 
@@ -210,21 +213,27 @@ combo_t key_combos[] = {
     [COPY]        = COMBO(combo_copy,             LCTL(KC_C)),
     [PASTE]       = COMBO(combo_paste,            LCTL(KC_V)),
     [ENTER]       = COMBO(combo_enter,            KC_ENTER),
+    [DOT_EU]      = COMBO(combo_dot_eu,           KC_DOT_EU),
     //[VIM_EXIT]    = COMBO(combo_vim_exit,         KC_VIM_EXIT),
     //[VIM_SAVE]    = COMBO(combo_vim_save,         KC_VIM_SAVE),
 };
 
-//void process_combo_event(uint16_t combo_index, bool pressed) {
-//    switch(combo_index) {
-//        case VIM_EXIT:
-//            if (pressed) {
-//                SEND_STRING("\x1B:q!\n");
-//            }
-//            break;
-//        case VIM_SAVE:
-//            if (pressed) {
-//                SEND_STRING("\x1B:wq\n");
-//            }
-//            break;
-//    }
-//}
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+        case DOT_EU:
+            if (pressed) {
+                SEND_STRING(".eu");
+            }
+            break;
+        //case VIM_EXIT:
+        //    if (pressed) {
+        //        SEND_STRING("\x1B:q!\n");
+        //    }
+        //    break;
+        //case VIM_SAVE:
+        //    if (pressed) {
+        //        SEND_STRING("\x1B:wq\n");
+        //    }
+        //    break;
+    }
+}
